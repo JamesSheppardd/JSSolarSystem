@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Solar System</title>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+        </style>
+        <div id="edit-div">
+
+        </div>
+        <div class="dev-content">
+            <p id='mouseX'>x: </p>
+            <p id='mouseY'>y: </p>
+            <p id='selected'>selected: </p>
+            <form id='G-form'>
+                <input type="number" placeholder="G = " style='width: 55px; color: black;'>
+                <input type="submit" value="Submit" style="border: 17px; color: black;">
+            </form>
+            <button id='edit-btn'>Edit</button>
+        </div>
+
+        <div id="planet-info-board" class='planet-info-board' style="visibility: hidden;">
+            <p id='planet-info-board__name' class='planet-info-board'></p>
+            <p id='planet-info-board__pos' class='planet-info-board'></p>
+            <p id='planet-info-board__velocity' class='planet-info-board'></p>
+            <p id='planet-info-board__mass' class='planet-info-board'></p>
+            <p id='planet-info-board__year' class='planet-info-board'></p>
+            <p id='planet-info-board__moons' class='planet-info-board'></p>
+            <p id='planet-info-board__gfs' class='planet-info-board'></p>
+        </div>
+
+        <div id="new-body-modal" class="modal">
+            <div class="modal-content">
+                <h2 id="modal-title"><u>New body</u></h2>
+                <form class="modal-content-form">
+                    <span id="modal__body-name-span">Body name:</span>
+                    <input id="modal__body-name" type="text" placeholder="Name">
+                    <br>
+                    <input id="modal__body-type" type="radio">
+                    <span id="modal__body-type-span">Planet</span>
+                    <br>
+                    <span id="modal__body-mass-span">Mass:</span>
+                    <input id="modal__body-mass" type="text" placeholder="*10^24">
+                    <br>
+                    <span id="modal__body-radius-span">Radius:</span>
+                    <input id="modal__body-radius" type="range" min="5" max="30" value="15">
+                    <br>
+                    <span id="modal__body-colour-span">Colour:</span>
+                    <input id="modal__body-colour" type="color">
+                    <span>Random?</span>
+                    <input id="modal__body-colour-random" type="checkbox">
+                    <br>
+                    <input id="modal__body-submit" type="submit" value="Create Body">
+                    <input id="modal__body-discard" type="button" value="Discard">
+                </form>
+            </div>
+        </div>
+
+        <script src="DOMFunctions.js"></script>
+        <script src="functions.js"></script>
+        <script src="noise.js"></script>
+        <script src="modal.js"></script>
+        <script src="sketch.js"></script>
+    </body>
+</html>
