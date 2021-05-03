@@ -20,6 +20,7 @@
 
 .planet-info-board{
     color: white;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal {

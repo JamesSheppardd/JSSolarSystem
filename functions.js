@@ -69,4 +69,95 @@ const newPlanetSetup = (clickPos) => {
         distToSun: sunPlanetDist
     }
 }
+
+// Logic for selecting a planet
+const SelectedPlanetText = (planet) => {
+    if(selectedPlanetRef ) {
+        selectedPlanet = `${planet.name} at x:${planet.pos.x.toFixed(1)}, y: ${planet.pos.y.toFixed(1)}`
+    }
+}
+const DrawInfoPanel = () => {
+    if(selectedPlanetRef) {
+        stroke('white');
+        line(selectedPlanetRef.pos.x, selectedPlanetRef.pos.y, selectedPlanetRef.pos.x + 50, selectedPlanetRef.pos.y - 30);
+        const lineLength = selectedPlanetRef.name.split('').length * 25;
+        line(selectedPlanetRef.pos.x + 50, selectedPlanetRef.pos.y - 30, selectedPlanetRef.pos.x + 50 + lineLength, selectedPlanetRef.pos.y - 30);
+        
+        // Text
+        planetInfoBoardEl[0].setAttribute('style', `position: absolute; top: ${height/2 + (selectedPlanetRef.pos.y - 50)}px; left: ${width/2 + (selectedPlanetRef.pos.x + 56)}px;`)
+        planetInfoBoardEl[1].innerHTML = selectedPlanetRef.name;
+        planetInfoBoardEl[2].innerHTML = `${selectedPlanetRef.name} is currently ${selectedPlanetRef.rToSun.toFixed(2)} away from the sun`
+        planetInfoBoardEl[3].innerHTML = `Speed: ${selectedPlanetRef.vel.mag().toFixed(2)}`;
+        planetInfoBoardEl[4].innerHTML = `Mass: ${selectedPlanetRef.mass.toFixed(2)}kg`;
+        planetInfoBoardEl[5].innerHTML = `Year length: ${selectedPlanetRef.t.toFixed(2)} Earth days`;
+        planetInfoBoardEl[6].innerHTML = `GFS: ${selectedPlanetRef.gfs.toFixed(3)}`;
+        for(let i = 1; i < planetInfoBoardEl.length; i++ ){
+            planetInfoBoardEl[i].setAttribute('style', 'visibility: shown;')
+        }
+    } else{
+        for(let i = 0; i < planetInfoBoardEl.length; i++ ){
+            planetInfoBoardEl[i].setAttribute('style', 'visibility: hidden; position: absolute; ')
+        }
+    }
+}
+
+//#endregion
+
+
+// DOM functions \\
+//#region 
+
+// Editing
+const edit = () => {
+    console.log("Is Editing");
+    // Create new canvas that isn't paused
+    editCanvas = document.createElement('canvas');
+    editDivEl.appendChild(editCanvas);
+    editCtx = editCanvas.getContext('2d');
+
+    editCanvas.width = 32;
+    editCanvas.height = 32;
+
+    editCtx.fillStyle = "#ffffff";
+    editCtx.beginPath();
+    //editCtx.fillRect(0,0,editCanvas.width, editCanvas.height)
+    editCtx.arc(editCanvas.width/2,editCanvas.height/2,editCanvas.width / 2, 0, 2 * Math.PI);
+    editCtx.fill()
+
+    window.addEventListener('mousemove', (e) => {
+        editDivEl.style.top = `${e.clientY - editCanvas.width/2}px`;
+        editDivEl.style.left = `${e.clientX - editCanvas.height/2}px`;
+    });
+    setTimeout(() => {
+        canCreateBody = true;
+    }, 500);
+}
+const hideEdit = () => {
+    editDivEl.removeChild(editCanvas);
+    newBodyModal.style.display = 'none';
+    newModalSubmitEl.value = 'Create Body';
+    frameRate(60);
+    frameR = 60;
+}
+
+//#endregion
+
+// Event Listener functions \\
+//#region 
+
+
+//#endregion
+
+// Miscellaneous functions \\
+//#region 
+
+// Random colour
+const randomColour = () => {
+    let randCol = [];
+    for(let i = 0; i < 6; i++){
+        randCol.push(hexValues[Math.floor(Math.random() * 16)]);
+    }
+    return `#${randCol.join('')}`;
+}
+
 //#endregion

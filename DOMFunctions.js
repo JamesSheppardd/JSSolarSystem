@@ -33,50 +33,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Random colour
-const randomColour = () => {
-    let randCol = [];
-    for(let i = 0; i < 6; i++){
-        randCol.push(hexValues[Math.floor(Math.random() * 16)]);
-    }
-    return `#${randCol.join('')}`;
-}
-
-
-// Editing
-
-const edit = () => {
-    console.log("Is Editing");
-    // Create new canvas that isn't paused
-    editCanvas = document.createElement('canvas');
-    editDivEl.appendChild(editCanvas);
-    editCtx = editCanvas.getContext('2d');
-
-    editCanvas.width = 32;
-    editCanvas.height = 32;
-
-    editCtx.fillStyle = "#ffffff";
-    editCtx.beginPath();
-    //editCtx.fillRect(0,0,editCanvas.width, editCanvas.height)
-    editCtx.arc(editCanvas.width/2,editCanvas.height/2,editCanvas.width / 2, 0, 2 * Math.PI);
-    editCtx.fill()
-
-    window.addEventListener('mousemove', (e) => {
-        editDivEl.style.top = `${e.clientY - editCanvas.width/2}px`;
-        editDivEl.style.left = `${e.clientX - editCanvas.height/2}px`;
-    });
-    setTimeout(() => {
-        canCreateBody = true;
-    }, 500);
-}
-const hideEdit = () => {
-    editDivEl.removeChild(editCanvas);
-    newBodyModal.style.display = 'none';
-    newModalSubmitEl.value = 'Create Body';
-    frameRate(60);
-    frameR = 60;
-}
-
 newBodyModal.addEventListener('submit', (e) => {
     e.preventDefault();
 })
