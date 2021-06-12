@@ -10,12 +10,23 @@
     color: white;
 }
 
-#G-form, #edit-btn, .modal{
+#G-form, .modal{
     color: black;
 }
 
-#edit-div {
+#edit-div{
+    position: absolute;
+}
+
+#edit-btn-div {
     position:absolute;
+    right: 1%;
+    bottom: 2%;
+}
+
+#edit-btn{
+    background: none;
+    border: none;
 }
 
 .planet-info-board{

@@ -1,6 +1,6 @@
 // Celestial body class
 class Body {
-    constructor(_name, _type, _mass, _r, _pos, _vel, _T, _gfs, _col, _rToSun){
+    constructor(_name, _type, _mass, _r, _pos, _vel, _T, _gfs, _col, _rToSun, _moons){
         this.name = _name;
         this.type = _type;
         this.mass = _mass;
@@ -13,6 +13,7 @@ class Body {
         this.colRef = _col;
         this.path = [];
         this.rToSun = _rToSun;
+        this.moons = _moons;
     }
     show() {
         stroke(this.col);
@@ -47,6 +48,12 @@ class Body {
         } else {
             this.col = this.colRef;
         }
+
+        // if(this.moons){
+        //     this.moons.forEach(moon => {
+        //         this.attract(moon);
+        //     });
+        // }
     }
 
     applyForce(f){

@@ -1,7 +1,11 @@
+// Text / dev content
+const devContent = document.getElementsByClassName('dev-content')[0];
 const mouseXEl = document.getElementById('mouseX');
 const mouseYEl = document.getElementById('mouseY');
 const selectedEl = document.getElementById('selected');
 const gFormEl = document.getElementById('G-form');
+let devMode = false;
+
 const editBtnEl = document.getElementById('edit-btn');
 const editDivEl = document.getElementById('edit-div');
 // Modal to add new body

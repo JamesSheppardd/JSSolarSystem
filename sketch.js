@@ -2,6 +2,7 @@ let sun, numPlanets = 3, destabilise = 0.2, selectedPlanetRef, selectedPlanet;
 let planets = [], planetNames = ['Venus', 'Mercury', 'Earth', 'Mars', 'Saturn', 'Jupiter', 'Neptune', 'Uranus']
 let G = 6.67430 * Math.pow(10, -28.5);
 
+const moons = []
 
 const planetInfoBoardNameEl = document.getElementById('planet-info-board__name');
 const planetInfoBoardEl = document.getElementsByClassName('planet-info-board');
@@ -21,8 +22,12 @@ function setup(){
 
     for(let i = 0; i < numPlanets; i++){
         const newPlanet = planetSetup();
-        planets.push(new Body(newPlanet.name, "Planet", newPlanet.mass, newPlanet.radius, newPlanet.pos, newPlanet.vel, newPlanet.t, newPlanet.g, newPlanet.colour, newPlanet.r));
+        planets.push(new Body(newPlanet.name, "Planet", newPlanet.mass, newPlanet.radius, newPlanet.pos, newPlanet.vel, newPlanet.t, newPlanet.g, newPlanet.colour, newPlanet.r, moons));
     }
+    const newPlanet = planetSetup();
+    const newMoon = planetSetup();
+    moons.push(new Body("moon", "Moon", newMoon.mass, newMoon.radius, newMoon.pos, newMoon.vel, newMoon.t, newMoon.g, newMoon.colour, newMoon.r))
+    planets.push(new Body("moonplanet", "Planet", newPlanet.mass, newPlanet.radius, newPlanet.pos, newPlanet.vel, newPlanet.t, newPlanet.g, newPlanet.colour, newPlanet.r, moons))
 }
 
 function draw() {
@@ -40,11 +45,23 @@ function draw() {
         planets[i].show();
         planets[i].update();
         sun.attract(planets[i]);
+        planets[i].attract(moons[0]);
     }
+    
+    //moons[0].show();
+    //moons[0].update();
+
     // text
-    mouseXEl.innerHTML = `x: ${currMouseX}`;
-    mouseYEl.innerHTML = `y: ${currMouseY}`;
-    selectedEl.innerHTML = `selected: ${selectedPlanet}`;
+    if(devMode){
+        mouseXEl.innerHTML = `x: ${currMouseX}`;
+        mouseYEl.innerHTML = `y: ${currMouseY}`;
+        selectedEl.innerHTML = `selected: ${selectedPlanet}`;
+    }else{
+        mouseXEl.innerHTML = ``;
+        mouseYEl.innerHTML = ``;
+        selectedEl.innerHTML = ``;
+        gFormEl.innerHTML = '';
+    }
     SelectedPlanetText(selectedPlanetRef);
     DrawInfoPanel();
 }
